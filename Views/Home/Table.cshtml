@@ -1,0 +1,181 @@
+﻿@using Assistance.Models
+@model clsPersons
+
+@{
+    ViewBag.Title = "Registro";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<br />
+
+<h2>Registro</h2>
+<hr />
+<!-- Button trigger modal -->
+<form action="~/FormCreatePerson" method="post" data-ajax="true" data-ajax-method="POST" data-ajax-mode="replace" data-ajax-update="#register-div" id="FormRegister">
+    <button type="submit" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#RegisterModal"><i class="fa fa-plus"></i> Register</button>
+</form>
+
+<!-- Button trigger modal -->
+<hr />
+<table class="table table-dark">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Nombre</th>
+            <th scope="col">Celular</th>
+            <th scope="col">Correo Electrónico</th>
+            <th scope="col">Bautismo</th>
+            <th scope="col"></th>
+        </tr>
+    </thead>
+    <tbody>
+        @{
+            int x = 0;
+        }
+
+        @foreach (var item in Model.ListPersons)
+        {
+            <tr>
+                <td>
+                    @{ x = x + 1; }
+                    <p> @x </p>
+                </td>
+                <td>@item.FirstName, @item.LastName</td>
+                <td>@item.PhoneNumber</td>
+                <td>@item.Email</td>
+                <td>
+                    @if (item.Baptism)
+                    {<p>Si</p> }
+                    else
+                    { <p>No</p>}
+                </td>
+                <td>
+                    <div class="row">
+                        <div class="d-flex align-self-md-auto">
+                            <div class="d-inline col-4">
+                                <form action="~/PersonProfile" method="post" data-ajax="true" data-ajax-method="POST" data-ajax-mode="replace" data-ajax-update="#profile-div" id="FormRegister">
+                                    <input type="hidden" id="pPersonID" name="pPersonID" value="@item.PersonID" />
+                                    <button type="submit" onclick="value()" class="btn btn-light" data-bs-toggle="modal" data-bs-target="#ProfileModal" id="submit-personid"><i class="fa fa-eye"></i></button>
+                                </form>
+                            </div>
+                            <div class="d-inline col-4">
+                                <form action="~/GetProfile" method="post" data-ajax="true" data-ajax-method="POST" data-ajax-mode="replace" data-ajax-update="#profile-edit-div" id="FormRegister">
+                                    <input type="hidden" id="pPersonID" name="pPersonID" value="@item.PersonID" />
+                                    <button type="submit" onclick="value()" class="btn btn-light" data-bs-toggle="modal" data-bs-target="#ProfileEditModal" id="submit-personid"><i class="fa fa-pencil"></i></button>
+                                </form>
+                            </div>
+                            <div class="d-inline col-4">
+                                <form action="~/PersonProfile" method="post" data-ajax="true" data-ajax-method="POST" data-ajax-mode="replace" data-ajax-update="#profile-delete-div" id="FormRegister">
+                                    <input type="hidden" id="pPersonID" name="pPersonID" value="@item.PersonID" />
+                                    <button type="submit" onclick="value()" class="btn btn-light" data-bs-toggle="modal" data-bs-target="#ProfileDeleteModal" id="submit-personid"><i class="fa fa-trash"></i></button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<!-- Modal Register -->
+<section>
+    <div class="modal fade" id="RegisterModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="RegisterModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="staticBackdropLabel">Registrar nuevo miembro</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form action="~/CreatePerson" method="post">
+                    <div class="modal-body">
+                        <div id="register-div"></div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-success" id="submit-person" name="submit-person"><i class="fa fa-plus"></i> Crear</button>
+                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal"> Cancel</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Modal Register -->
+<!-- Modal Profile -->
+<section>
+    <div class="modal fade" id="ProfileModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="ProfileModal" aria-hidden="true">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="staticBackdropLabel">Perfil</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form action="~/CreatePerson" method="post">
+                    <div class="modal-body">
+                        <div id="profile-div"></div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"> Close</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Modal Profile -->
+<!-- Modal Edit Profile -->
+<section>
+    <div class="modal fade" id="ProfileEditModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="ProfileEditModal" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="staticBackdropLabel">Editar Perfil</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form action="~/EditProfile" method="post">
+                    <div class="modal-body">
+                        <div id="profile-edit-div"></div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-success" id="submit-person" name="submit-person"><i class="fa fa-plus"></i> Guardar Cambios</button>
+                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal"> Cancel</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Modal Edit Profile -->
+<!-- Modal Delete Profile -->
+<section>
+    <div class="modal fade" id="ProfileDeleteModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="ProfileDeleteModal" aria-hidden="true">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="staticBackdropLabel">Eliminar Perfil</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="row">
+                    <div class="d-flex">
+                        <div class="alert alert-danger" role="alert">
+                            ¿Estás seguro que deseas eliminar este registro?
+                        </div>
+                    </div>
+                </div>
+                <form action="~/DeleteProfile" method="post">
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="d-flex p-2">
+                                <div id="profile-delete-div"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-success" id="submit-person" name="submit-person"><i class="fa fa-trash"></i> Eliminar Registro</button>
+                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal"> Cancel</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Modal Delete Profile -->

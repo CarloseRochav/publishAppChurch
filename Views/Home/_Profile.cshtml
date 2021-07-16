@@ -1,0 +1,38 @@
+﻿@using Assistance.Models
+@model clsPersons
+<div class="row">
+    <div class="d-flex p-2">
+        <div class="card" style="width: 18rem;">
+            <input type="hidden" id="pPersonID" name="pPersonID" value="@Model.PersonID" />
+            <div class="pic-abc">
+                @if (!String.IsNullOrWhiteSpace(Model.Picture))
+                {
+                    <img class="img-fluid" alt="100x100" src="@Model.Picture" data-holder-rendered="true">
+                }
+                else if (String.IsNullOrWhiteSpace(Model.Picture) == true && Model.Gender == "F")
+                {
+                    <img class="img-fluid" alt="100x100" src="https://i.pinimg.com/originals/a6/58/32/a65832155622ac173337874f02b218fb.png" data-holder-rendered="true">
+                }
+                else if (String.IsNullOrWhiteSpace(Model.Picture) == true && Model.Gender == "M")
+                {
+                    <img class="img-fluid" alt="100x100" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcScPuSSp3dmio9nEwA8FEAppD_ZzC7j7pCaDKYjiG1thpF4AyTQ-CvOonekXg3JdRl-_Kk&usqp=CAU" data-holder-rendered="true">
+                }
+            </div>
+            <div class="card-body">
+                <p class="card-text"><b>Nombre:</b> @Model.FirstName, @Model.LastName</p>
+                <p class="card-text"><b>Teléfono:</b> @Model.PhoneNumber</p>
+                <p class="card-text"><b>Domicilio:</b> @Model.Address</p>
+                <p class="card-text"><b>Email:</b> @Model.Email</p>
+                <p class="card-text">
+                    <b>Bautismo: </b>@{
+                        if (Model.Baptism)
+                        { <span style="color:green">Si</span> }
+                        else
+                        { <span style="color:red">No</span> }
+                    }
+                </p>
+            </div>
+        </div>
+    </div>   
+</div>
+

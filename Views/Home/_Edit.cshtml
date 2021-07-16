@@ -1,0 +1,127 @@
+﻿@using Assistance.Models
+@model clsPersons
+<div class="row">
+    <input type="hidden" name="pPersonID" id="pPersonID" value="@Model.PersonID" />
+    <!--Name-->
+    <div class="row">
+        <div class="col-6 d-inline">
+            <label class="form-label" for="pFirstName">Nombre:</label>
+        </div>
+        <div class="col-6 d-inline">
+            <input type="text" class="form-control" name="pFirstName" id="pFirstName" value="@Model.FirstName" placeholder="@Model.FirstName" autocomplete="off" />
+        </div>
+        <br />
+        <br />
+    </div>
+    <!--Name-->
+    <!--LastName-->
+    <div class="row">
+        <div class="col-6 d-inline">
+            <label class="form-label" for="pLastName">Apellido:</label>
+        </div>
+        <div class="col-6 d-inline">
+            <input type="text" class="form-control" name="pLastName" id="pLastName" value="@Model.LastName" placeholder="@Model.LastName" autocomplete="off" />
+        </div>
+        <br />
+        <br />
+    </div>
+    <!--LastName-->
+    <!--PhoneNumber-->
+    <div class="row">
+        <div class="col-6 d-inline">
+            <label class="form-label" for="pPhoneNumber">Número de Teléfono:</label>
+        </div>
+        <div class="col-6 d-inline">
+            <input type="text" class="form-control" name="pPhoneNumber" id="pPhoneNumber" value="@Model.PhoneNumber" placeholder="@Model.PhoneNumber" autocomplete="off" />
+        </div>
+        <br />
+        <br />
+    </div>
+    <!--PhoneNumber-->
+    <!--Address-->
+    <div class="row">
+        <div class="col-6 d-inline">
+            <label class="form-label" for="pAddress">Domicilio:</label>
+        </div>
+        <div class="col-6 d-inline">
+            <input type="text" class="form-control" name="pAddress" id="pAddress" value="@Model.Address" placeholder="@Model.Address" autocomplete="off" />
+        </div>
+        <br />
+        <br />
+    </div>
+    <!--Address-->
+    <!--Email-->
+    <div class="row">
+        <div class="col-6 d-inline">
+            <label class="form-label" for="pEmail">Correo Electrónico:</label>
+        </div>
+        <div class="col-6 d-inline">
+            <input type="text" class="form-control" name="pEmail" id="pEmail" value="@Model.Email" placeholder="@Model.Email" autocomplete="off" />
+        </div>
+        <br />
+        <br />
+    </div>
+    <!--Email-->
+    <!--Gender-->
+    <div class="row">
+        <div class="col-6 d-inline">
+            <label class="form-label" for="pGender">Género:</label>
+        </div>
+        <div class="col-6 d-inline">
+            <div class="col-6 d-inline">
+                <select class="form-select d-inline" id="pGender" name="pGender" required>
+                    @if (Model.Gender == "M")
+                    {
+                        <option value="M" selected>Masculino</option>
+                        <option value="F">Femenino</option>
+                    }
+                    else if (Model.Gender == "F")
+                    {
+                        <option value="F" selected>Femenino</option>
+                        <option value="M">Masculino</option>
+                    }
+                </select>
+            </div>
+        </div>
+        <br />
+        <br />
+    </div>
+    <!--Gender-->
+    <!--Baptism-->
+    <div class="row">
+        <div class="col-6 d-inline">
+            <label class="form-label" for="pBaptism">Bautismo:</label>
+        </div>
+        <div class="col-6 d-inline">
+            <div class="col-6 d-inline">
+                <select class="form-select d-inline" id="pBaptism" name="pBaptism" required>
+                    @if (Model.Baptism == true)
+                    {
+                        <option value="1" selected>Si</option>
+                        <option value="0">No</option>
+                    }
+                    else if (Model.Baptism == false)
+                    {
+                        <option value="0" selected>No</option>
+                        <option value="1">Si</option>
+                    }
+                </select>
+            </div>
+        </div>
+        <br />
+        <br />
+    </div>
+    <!--Baptism-->
+    <!--Picture-->
+    <div class="row">
+        <div class="col-6 d-inline">
+            <label class="form-label" for="pPicture">Foto de perfil:</label>
+        </div>
+        <div class="col-6 d-inline">
+            <input type="text" class="form-control" name="pPicture" id="pPicture" value="@Model.Picture" placeholder="@Model.Picture" autocomplete="off" />
+        </div>
+        <br />
+        <br />
+    </div>
+    <!--Picture-->
+</div>
